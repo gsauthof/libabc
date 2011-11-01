@@ -29,8 +29,8 @@ use autotools
 
 always use the GPL's "(or later)" clause
   - developers are not lawyers, libraries should be able to be linked
-    to any version of the GPL. Remember that LGPL2-only is
-    incompatible with GPL3!
+    to any version of the GPL. Remember that GPL2-only is incompatible
+    with LGPL3!
 
 use LGPL if you don't care about politics
 
