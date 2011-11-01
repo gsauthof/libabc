@@ -36,7 +36,7 @@ AC_CONFIG_FILES([
 
 AC_OUTPUT
 AC_MSG_RESULT([
-	libabc $VERSION
+	$PACKAGE $VERSION
 	========
 
 	prefix:			${prefix}
