@@ -23,7 +23,7 @@ use autotools
   - And really, anything but autotools is not an option. Just get over
     it. Everything else is crack, and it will come back to you if you
     choose anything else, sooner or later. Why? think cross
-    compilation, installation/deinstallation, build root integration,
+    compilation, installation/uninstallation, build root integration,
     separate object trees, standard adherence, tarball handling, make
     distcheck, portability between distros, ...
 
@@ -38,17 +38,17 @@ zero global state -- Make your library threads-aware, but *not*
 thread-safe!
   - an app can use liba and libb. libb internally can also use liba --
     without you knowing. Both you and libb can run liba code at the
-    very same time in diffrent threads and operate at the same global
+    very same time in different threads and operate at the same global
     variables, without telling you about that. Loadable modules make
     this problem even more prominent, since the libraries they pull in
     are generally completely unknown by the main application. And
     *every* program has loadable modules, think NSS!
-  - avoid locking, mutexes, they very unlikely to work correctly, and
-    incredibly hard to get right.
+  - avoid locking and mutexes, they are very unlikely to work correctly,
+    and incredibly hard to get right.
   - always use a library context object. every thread should then
     operate on its own context. Do not imply context objects via TLS. It
-    won't work. TLS inheritance to new threads will come into your
-    way. TLS is a problem in itself, not a solution.
+    won't work. TLS inheritance to new threads will get in your way. TLS
+    is a problem in itself, not a solution.
   - do not use gcc constructors, or destructors, you can only loose if
     you do. Do not use _fini() or _ini(), don't even use your own
     explicit library initializer/destructor functions. It just won't
@@ -57,14 +57,14 @@ thread-safe!
   - Always use O_CLOEXEC, SOCK_CLOEXEC and friends. It's not an
     option, it's a must.
   - Don't use global variables (it includes static variables defined
-    inside functions). Ever. And and under no circumstances
-    export global variables. It's madness.
+    inside functions). Ever. And under no circumstances export global
+    variables. It's madness.
 
-use common prefix for _all_ exported symbols
+use a common prefix for _all_ exported symbols
   - Avoids namespace clashes
   - Also, hacking is not a contest of finding the shortest possible
     function name. And nobody cares about your 80ch line limit!
-  - If you use a drop in library in your own library make sure to hide its
+  - If you use a drop-in library in your own library make sure to hide its
     symbols with symbol versioning. Don't forget to hide *all* symbols, and
     don't install the header file of the used drop-in library.
 
@@ -77,7 +77,7 @@ do not expose any complex structures in your API
     primitive types (think struct timeval, struct iovec, uuid
     type).
   - Why bother? Because struct stat, struct dirent and friends are
-    desasters. Particularly horrible are structs with fixed-size
+    disasters. Particularly horrible are structs with fixed-size
     strings.
 
 Use the de-facto standardized function names. It's abc_new(),
@@ -153,7 +153,7 @@ always use 'make distcheck' to create tarballs
   - never release anything that does not pass distcheck. it will
     likely be broken for others too
 
-use ./autogen to bootstrap the git repo
+use ./autogen.sh to bootstrap the git repo
   - always test bootstrapping with 'git clean -x -f -d' before release
 
 avoid any spec files or debian/ subdirs in git trees
@@ -165,7 +165,7 @@ update NEWS to let developers know what has changed
   - add commit changelog from git, do not maintain your own
 
 use standard types
-  - Kernel's u8, u16, ... corresponds with uint8_t, uint16_t in
+  - The kernel's u8, u16, ... correspond to uint8_t, uint16_t in
     userspace from <inttypes.h>. Nothing else. Don't define your own
     typedefs for that, don't include the kernel types in common
     headers.
@@ -191,8 +191,8 @@ Don't put "extern" in front of your function prototypes in headers
   - It has no effect, no effect at all. Just don't do it.
 
 Never use sysv IPC, always use POSIX IPC
-  - shmops, semops are horror. Don't use them. Ever. POSIX IPC is much
-    much much nicer.
+  - shmops and semops are horrors. Don't use them. Ever. POSIX IPC is
+    much much much nicer.
 
 Do not multiplex functions via ioctl()/prctl() style variadic functions
   - Type-safety is awesome!
@@ -220,5 +220,5 @@ glibc has byteswapping calls, don't invent your own:
 
 don't typedef pointers to structs!
 
-Don't write your own LISP interpretor and do not include it in your
+Don't write your own LISP interpreter and do not include it in your
 library.
