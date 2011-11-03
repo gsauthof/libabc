@@ -15,18 +15,18 @@ LT_INIT([disable-static])
 AC_PREFIX_DEFAULT([/usr])
 
 AC_ARG_ENABLE([logging],
-	AS_HELP_STRING([--disable-logging], [disable system logging]),
+	AS_HELP_STRING([--disable-logging], [disable system logging @<:@default=enabled@:>@]),
 	[], enable_logging=yes)
-if test "x$enable_logging" = "xyes"; then
+AS_IF([test "x$enable_logging" = "xyes"], [
 	AC_DEFINE(ENABLE_LOGGING, [1], [System logging.])
-fi
+])
 
 AC_ARG_ENABLE([debug],
-	AS_HELP_STRING([--enable-debug], [enable debug messages]),
+	AS_HELP_STRING([--enable-debug], [enable debug messages @<:@default=disabled@:>@]),
 	[], [enable_debug=no])
-if test "x$enable_debug" = "xyes"; then
+AS_IF([test "x$enable_debug" = "xyes"], [
 	AC_DEFINE(ENABLE_DEBUG, [1], [Debug messages.])
-fi
+])
 
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_FILES([

@@ -180,7 +180,7 @@ ABC_EXPORT struct abc_ctx *abc_ref(struct abc_ctx *ctx)
 ABC_EXPORT struct abc_ctx *abc_unref(struct abc_ctx *ctx)
 {
 	if (ctx == NULL)
-		return;
+		return NULL;
 	ctx->refcount--;
 	if (ctx->refcount > 0)
 		return ctx;

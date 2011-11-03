@@ -17,5 +17,4 @@ args="--prefix=/usr \
 --sysconfdir=/etc \
 --libdir=$(libdir /usr/lib)"
 
-export CFLAGS
-./configure $args $@
+./configure $args CFLAGS="${MYCFLAGS} ${CFLAGS}" $@

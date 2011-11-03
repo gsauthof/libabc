@@ -1,4 +1,3 @@
-SUBDIRS = .
 EXTRA_DIST = autogen.sh
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 AM_MAKEFLAGS = --no-print-directory
@@ -34,12 +33,14 @@ libabc_libabc_la_SOURCES =\
 
 EXTRA_DIST += libabc/libabc.sym
 
-libabc_libabc_la_LDFLAGS = \
+libabc_libabc_la_LDFLAGS = $(AM_LDFLAGS) \
 	-version-info $(LIBABC_CURRENT):$(LIBABC_REVISION):$(LIBABC_AGE) \
 	-Wl,--version-script=$(top_srcdir)/libabc/libabc.sym
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libabc/libabc.pc
+
+TESTS = test-libabc
 
 check_PROGRAMS = test-libabc
 test_libabc_SOURCES = test-libabc.c
