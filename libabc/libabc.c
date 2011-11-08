@@ -206,7 +206,7 @@ ABC_EXPORT void abc_set_log_fn(struct abc_ctx *ctx,
 					     const char *format, va_list args))
 {
 	ctx->log_fn = log_fn;
-	info(ctx, "custom logging function %p registered\n", ctx);
+	info(ctx, "custom logging function %p registered\n", log_fn);
 }
 
 /**
