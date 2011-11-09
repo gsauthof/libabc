@@ -7,11 +7,12 @@ AC_INIT([libabc],
 AC_CONFIG_SRCDIR([libabc/libabc.c])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([check-news foreign 1.11 -Wall -Wno-portability silent-rules tar-pax dist-bzip2 subdir-objects])
+AC_PROG_CC_STDC
 AC_USE_SYSTEM_EXTENSIONS
 AC_SYS_LARGEFILE
 AC_CONFIG_MACRO_DIR([m4])
 AM_SILENT_RULES([yes])
-LT_INIT([disable-static])
+LT_INIT([disable-static pic-only])
 AC_PREFIX_DEFAULT([/usr])
 
 AC_ARG_ENABLE([logging],
