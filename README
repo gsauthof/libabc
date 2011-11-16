@@ -1,8 +1,10 @@
-You may copy any of the files provided in this example library freely
-and distribute them without any notice, without any restrictions or
-any need to mention any copyright notice.
+You may copy any of the files provided in this skeleton library freely
+and distribute them without any notice or statement. You are free to use
+it with any license. There is absolutely no need to mention where it
+comes from, unless you really want to.
 
-For questions and feedback please contact:
+Questions, feedback, patches please contact:
+        linux-hotplug@vger.kernel.org
         Kay Sievers <kay.sievers@vrfy.org>
         Lennart Poettering <lennart@poettering.net>
 
@@ -27,12 +29,15 @@ use autotools
     separate object trees, standard adherence, tarball handling, make
     distcheck, portability between distros, ...
 
-always use the GPL's "(or later)" clause
+If you use the GPL, always use the GPL's "(or later)" clause
   - developers are not lawyers, libraries should be able to be linked
     to any version of the GPL. Remember that GPL2-only is incompatible
     with LGPL3!
 
 use LGPL if you don't care about politics
+  - low-level library interfaces are conceptually similar to kernel
+    syscall ior proc/sysfs interfaces, which also don't have
+    restrictions.
 
 zero global state -- Make your library threads-aware, but *not*
 thread-safe!
