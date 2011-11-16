@@ -1,60 +1,83 @@
-You may copy any of the files provided in this skeleton library freely
-and distribute them without any notice or statement. You are free to use
-it with any license. There is absolutely no need to mention where it
-comes from, unless you really want to.
+/*
+  This is free and unencumbered software released into the public domain.
 
-Questions, feedback, patches please contact:
+  Anyone is free to copy, modify, publish, use, compile, sell, or
+  distribute this software, either in source code form or as a compiled
+  binary, for any purpose, commercial or non-commercial, and by any
+  means.
+
+  In jurisdictions that recognize copyright laws, the author or authors
+  of this software dedicate any and all copyright interest in the
+  software to the public domain. We make this dedication for the benefit
+  of the public at large and to the detriment of our heirs and
+  successors. We intend this dedication to be an overt act of
+  relinquishment in perpetuity of all present and future rights to this
+  software under copyright law.
+
+  Unless you really want to, do not even mention that your files originate
+  from this skeleton library. Its sole purpose is to be copied into other
+  projects.
+
+  The above statements apply to all content in this skeleton library, even
+  when the COPYING files, or the headers in the files state otherwise, they
+  are just common examples.
+*/
+
+Questions, feedback, patches please email:
         linux-hotplug@vger.kernel.org
+or:
         Kay Sievers <kay.sievers@vrfy.org>
         Lennart Poettering <lennart@poettering.net>
 
 Why bother?
   - To make things easy for library users, distribution packagers and
-    developers of library bindings for other programming languages.
+    developers of library bindings for other programming languages. If
+    you want your stuff to be used and commonly available, try to play
+    nice, and give them what they are used to. It makes their life a
+    lot easier.
 
 use autotools
-  - every custom config/makefile build system is worse for everybody
-    than autotools is
-  - we are all used to autotools, it works, nobody cares
-  - it's only two simple files to edit and include in git, which are
+  - Every custom config/makefile/build system is worse for everybody
+    than autotools is.
+  - We are all used to autotools, it works, nobody cares.
+  - It's only two simple files to edit and include in git, which are
     well understood by many many people, not just you.
-  - ignore all crap autotools create in the source tree. never check
-    the created files into git
-  - Never, ever, ever install config.h. That's internal to your
-    sources and is nothing to install.
-  - And really, anything but autotools is not an option. Just get over
-    it. Everything else is crack, and it will come back to you if you
-    choose anything else, sooner or later. Why? think cross
-    compilation, installation/uninstallation, build root integration,
-    separate object trees, standard adherence, tarball handling, make
-    distcheck, portability between distros, ...
+  - Ignore all crap autotools create in the source tree. never check
+    the created files into git.
+  - Never, ever, install config.h. That's internal to your sources
+    and is nothing to install.
+  - And really, anything but autotools is realy an option. Just get
+    over it. Everything else is an experiment, and it will come back
+    to you sooner or later. Why? think cross compilation, installation/
+    uninstallation, build root integration, separate object trees,
+    standard adherence, tarball handling, make distcheck, testing,
+    portability between distros, ...
 
 If you use the GPL, always use the GPL's "(or later)" clause
-  - developers are not lawyers, libraries should be able to be linked
+  - Developers are not lawyers, libraries should be able to be linked
     to any version of the GPL. Remember that GPL2-only is incompatible
     with LGPL3!
 
-use LGPL if you don't care about politics
-  - low-level library interfaces are conceptually similar to kernel
-    syscall ior proc/sysfs interfaces, which also don't have
-    restrictions.
+Use LGPL (for the shared libraries) if you don't care about politics
+  - It protects the code, but does not restrict its use. Low-level
+    library interfaces are mostly used like kernel syscall or proc/sysfs
+    interfaces, which are usually without any restrictions.
 
-zero global state -- Make your library threads-aware, but *not*
-thread-safe!
-  - an app can use liba and libb. libb internally can also use liba --
+Zero global state -- Make your library threads-aware, but *not* thread-safe!
+  - An app can use liba and libb. libb internally can also use liba --
     without you knowing. Both you and libb can run liba code at the
     very same time in different threads and operate at the same global
     variables, without telling you about that. Loadable modules make
     this problem even more prominent, since the libraries they pull in
     are generally completely unknown by the main application. And
     *every* program has loadable modules, think NSS!
-  - avoid locking and mutexes, they are very unlikely to work correctly,
+  - Avoid locking and mutexes, they are very unlikely to work correctly,
     and incredibly hard to get right.
-  - always use a library context object. every thread should then
+  - Always use a library context object. every thread should then
     operate on its own context. Do not imply context objects via TLS. It
     won't work. TLS inheritance to new threads will get in your way. TLS
     is a problem in itself, not a solution.
-  - do not use gcc constructors, or destructors, you can only loose if
+  - Do not use gcc constructors, or destructors, you can only loose if
     you do. Do not use _fini() or _ini(), don't even use your own
     explicit library initializer/destructor functions. It just won't
     work if your library is pulled in indirectly from another library
@@ -65,7 +88,7 @@ thread-safe!
     inside functions). Ever. And under no circumstances export global
     variables. It's madness.
 
-use a common prefix for _all_ exported symbols
+Use a common prefix for _all_ exported symbols
   - Avoids namespace clashes
   - Also, hacking is not a contest of finding the shortest possible
     function name. And nobody cares about your 80ch line limit!
@@ -73,10 +96,10 @@ use a common prefix for _all_ exported symbols
     symbols with symbol versioning. Don't forget to hide *all* symbols, and
     don't install the header file of the used drop-in library.
 
-do not expose any complex structures in your API
-  - use get() and set() instead
-  - all objects should be opaque
-  - exporting structs in headers is OK in very few cases only: usually
+Do not expose any complex structures in your API
+  - Use get() and set() instead.
+  - All objects should be opaque.
+  - Exporting structs in headers is OK in very few cases only: usually
     those where you define standard binary formats (think: file
     formats, datagram headers, ...) or where you define well-known
     primitive types (think struct timeval, struct iovec, uuid
@@ -85,24 +108,25 @@ do not expose any complex structures in your API
     disasters. Particularly horrible are structs with fixed-size
     strings.
 
-Use the de-facto standardized function names. It's abc_new(),
-abc_free(), abc_ref(), abc_unref(), and nothing else. Don't invent
-your own names, and don't use the confusing kernel-style ref counting
-function names: _get() is for accessing properties of objects, nothing
-else.
+Use the de-facto standardized function names
+  - It's abc_new(), abc_free(), abc_ref(), abc_unref(). Don't invent
+    your own names, and don't use the confusing kernel-style ref
+    counting. Function names: _get() is for accessing properties of
+    objects, not for refcounting.
 
-Stick to kernel coding style. Just because you are otherwise not bound
-by the kernel guidelines when your write userspace libraries doesn't
-mean you have to give up the good things it defines.
+Stick to kernel coding style
+  - Just because you are otherwise not bound by the kernel guidelines
+    when your write userspace libraries doesn't mean you have to give
+    up the good things it defines.
 
-avoid callbacks in your API
-  - language bindings want iterators
-  - programmers want iterators too
+Avoid callbacks in your API
+  - Language bindings want iterators.
+  - Programmers want iterators too.
 
-never call exit(), abort(), be very careful with assert()
-  - always return error codes
-  - libraries need to be safe for usage in critical processes that
-    need to recover from errors instead of getting killed (think PID 1!)
+Never call exit(), abort(), be very careful with assert()
+  - Always return error codes.
+  - Libraries need to be safe for usage in critical processes that
+    need to recover from errors instead of getting killed (think PID 1!).
 
 Avoid thinking about main loops/event dispatchers.
   - Get your stuff right in the kernel: fds are awesome, expose them
@@ -115,22 +139,22 @@ Avoid thinking about main loops/event dispatchers.
     incompatible with that.
   - Corollary of that: always O_NONBLOCK!
 
-functions should return int and negative errors instead of NULL
-  - return NULL in malloc() is fine, return NULL in fopen() is not!
-  - pass allocated objects as parameter (yes, ctx_t** is OK!)
-  - returning kernel style negative <errno.h> error codes is cool in
+Functions should return int and negative errors instead of NULL
+  - Return NULL in malloc() is fine, return NULL in fopen() is not!
+  - Pass allocated objects as parameter (yes, ctx_t** is OK!)
+  - Returning kernel style negative <errno.h> error codes is cool in
     userspace too. Do it!
 
-provide pkgconfig files
-  - apps want to add a single line to their configure file,
+Provide pkgconfig files
+  - Apps want to add a single line to their configure file,
     they do not want to fiddle with the parameters, dependencies
-    to setup and link your library
-  - it's just how we do these things today on Linux, and everything
+    to setup and link your library.
+  - It's just how we do these things today on Linux, and everything
     else is just horribly messy.
 
-avoid hidden fork()/exec() in libraries
-  - apps generally do not expect signals and react allergic to them
-  - mutexes, locks, threads of the app might get confused. Mixing
+Avoid *hidden* fork()/exec() in libraries
+  - Apps generally do not expect signals and react allergic to them.
+  - Mutexes, locks, threads of the app might get confused. Mixing
     mutexes and fork() equals failure. It just can't work, and
     pthread_atfork() is not a solution for that, because it's broken
     (even POSIX acknowledges that, just read the POSIX man
@@ -138,42 +162,46 @@ avoid hidden fork()/exec() in libraries
     afterthought, it's a broken right from the beginning.
 
 Make your code safe for unexpected termination and any point:
-  - Do not leave files dirty or temporary files around
+  - Do not leave files dirty or temporary files around.
   - This is a tricky, since you need to design your stuff like this
     from the beginning, it's not an afterthought, since you generally
     do not have a place to clean up your stuff on exit. gcc
     destructors are NOT the answer.
 
-use symbol versioning
-  - only with that, RPM can handle dependencies for added symbols
+Use symbol versioning
+  - Only with that, RPM can handle dependencies for added symbols
   - Hide all internal symbols! *This is important!*
 
-always provide logging/debugging, but do not clutter stderr
-  - allow the app to hook the libs logging into its logging facility
-  - use conditional logging, do not filter too late
-  - do not burn cycles with printf() to /dev/null
-  - by default: do not generate any output on stdout/stderr
+Always provide logging/debugging, but do not clutter stderr
+  - Allow the app to hook the libs logging into its logging facility.
+  - Use conditional logging, do not filter too late.
+  - Do not burn cycles with printf() to /dev/null.
+  - By default: do not generate any output on stdout/stderr.
 
-always use 'make distcheck' to create tarballs
-  - never release anything that does not pass distcheck. it will
+Always use 'make distcheck' to create tarballs
+  - Never release anything that does not pass distcheck. It will
     likely be broken for others too
 
-use ./autogen.sh to bootstrap the git repo
-  - always test bootstrapping with 'git clean -x -f -d' before release
+Use ./autogen.sh to bootstrap the git repo
+  - Always test bootstrapping with 'git clean -x -f -d' before
+    release (careful, it force-deletes all uncommitted files).
 
-avoid any spec files or debian/ subdirs in git trees
-  - distribution specific things do not belong in upstream trees,
+Avoid any spec files or debian/ subdirs in git trees
+  - Distribution specific things do not belong in upstream trees,
     but into distro packages
 
-update NEWS to let developers know what has changed
-  - history of the project from version to version, not a commit changelog
-  - add commit changelog from git, do not maintain your own
+Update NEWS to let developers know what has changed
+  - It's the history of the project, stuff that packagers need to know
+    when putting a new version in the distro. The interesting changes
+    or added/removed functionality from version to version. This is
+    not a commit changelog.
+  - If you want to provide ChangeLog, use the one generated
+    by git, do not maintain your own.
 
 use standard types
   - The kernel's u8, u16, ... correspond to uint8_t, uint16_t in
-    userspace from <inttypes.h>. Nothing else. Don't define your own
-    typedefs for that, don't include the kernel types in common
-    headers.
+    userspace from <inttypes.h>. Don't define your own typedefs
+    for that, don't include the kernel types in common headers.
   - Use enums, not #define for constants, wherever possible. In
     userspace you have debuggers, and they are much nicer to use if
     you have proper enum identifiers instead of macro definitions,
@@ -182,34 +210,37 @@ use standard types
     function prototypes: they might change the int type they are
     resolved to as you add new enum values.
 
-always guard for multiple inclusions of headers
-  - You must place #ifndef libabc, #define libabc, #endif in your
-    header files. There is no other way.
+Always guard for multiple inclusions of headers
+  - You must place '#ifndef libabc, #define libabc, #endif' in your
+    header files. There is no way around that.
 
 Be careful with variadic functions
-  - it's cool if you provide them, but you must accompany them with
+  - It's great if you provide them, but you must accompany them with
     "v" variants (i.e. functions taking a va_arg object), and provide
     non-variadic variants as well. This is important to get language
     wrappers right.
 
 Don't put "extern" in front of your function prototypes in headers
-  - It has no effect, no effect at all. Just don't do it.
+  - It has no effect, no effect at all.
 
 Never use sysv IPC, always use POSIX IPC
-  - shmops and semops are horrors. Don't use them. Ever. POSIX IPC is
+  - Shmops and semops are horrors. Don't use them, ever. POSIX IPC is
     much much much nicer.
 
-Do not multiplex functions via ioctl()/prctl() style variadic functions
+Avoid multiplexed functions ala ioctl()/prctl() style variadic functions
   - Type-safety is awesome!
 
-executing out-of-process tools and parsing their output is not
-acceptable in libraries. Ever.
-  - tools should be built on top of their own lib
-  - separate 'mechanism' from 'policy'
+Executing out-of-process tools and parsing their output is usually
+not acceptable in libraries
+  - Tools should be built on top of their own lib.
+  - Always separate 'mechanism' from 'policy'. Make access to functionality
+    simple, but do not try to hide things that need to be decided by the
+    caller. Keep automagic at its minimum. Don't do hidden fork() do not
+    implicitly maintain cache files, ...
 
 Function calls with 15 arguments are a bad idea. If you have tons of
 booleans in a function call, then replace them by a flag argument!
-  - Think about the invocation! foo(0, 1, 0, 1, 0, 0, 0, 1) is stupid!
+  - Think about the invocation! foo(0, 1, 0, 1, 0, 0, 0, 1) is unreadable!
     foo(FOO_QUUX|FOO_BAR|FOO_WALDO) much nicer.
 
 Don't be afraid of C99. Use it.
@@ -219,11 +250,11 @@ Never expose fixed size strings in your API
   - Pass malloc()ed strings out, or ask the caller to provide you with
     a buffer, and return ENOSPC if too short.
 
-glibc has byteswapping calls, don't invent your own:
+Glibc has byteswapping calls, don't invent your own:
   - le32toh(), htole32() and friends
   - bswap32() and friends()
 
-don't typedef pointers to structs!
+Don't typedef pointers to structs!
 
 Don't write your own LISP interpreter and do not include it in your
-library.
+library. :)
