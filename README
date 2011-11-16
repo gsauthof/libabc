@@ -14,13 +14,13 @@
   relinquishment in perpetuity of all present and future rights to this
   software under copyright law.
 
-  Unless you really want to, do not even mention that your files originate
-  from this skeleton library. Its sole purpose is to be copied into other
-  projects.
+  Unless you really want to, do not even mention that the copied content
+  originates from this skeleton library. Its sole purpose is to be copied
+  into other projects.
 
   The above statements apply to all content in this skeleton library, even
-  when the COPYING files, or the headers in the files state otherwise, they
-  are just common examples.
+  when the COPYING files, or the headers in the files state otherwise,
+  they are just common examples.
 */
 
 Questions, feedback, patches please email:
