@@ -17,4 +17,4 @@ args="--prefix=/usr \
 --sysconfdir=/etc \
 --libdir=$(libdir /usr/lib)"
 
-./configure $args CFLAGS="${MYCFLAGS} ${CFLAGS}" $@
+exec ./configure $args CFLAGS="${MYCFLAGS} ${CFLAGS}" "$@"
