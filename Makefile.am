@@ -36,6 +36,7 @@ EXTRA_DIST += libabc/libabc.sym
 libabc_libabc_la_LDFLAGS = $(AM_LDFLAGS) \
 	-version-info $(LIBABC_CURRENT):$(LIBABC_REVISION):$(LIBABC_AGE) \
 	-Wl,--version-script=$(top_srcdir)/libabc/libabc.sym
+libabc_libabc_la_DEPENDENCIES = ${top_srcdir}/libabc/libabc.sym
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libabc/libabc.pc
