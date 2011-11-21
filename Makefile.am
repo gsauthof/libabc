@@ -5,7 +5,7 @@ AM_MAKEFLAGS = --no-print-directory
 
 AM_CPPFLAGS = \
 	-include $(top_builddir)/config.h \
-	-I$(top_srcdir)/libabc \
+	-I${top_srcdir}/include -I${top_builddir}/include \
 	-DSYSCONFDIR=\""$(sysconfdir)"\" \
 	-DLIBEXECDIR=\""$(libexecdir)"\"
 
@@ -22,11 +22,10 @@ LIBABC_CURRENT=2
 LIBABC_REVISION=0
 LIBABC_AGE=2
 
-include_HEADERS = libabc/libabc.h
+pkginclude_HEADERS = include/libabc/libabc.h
 lib_LTLIBRARIES = libabc/libabc.la
 
 libabc_libabc_la_SOURCES =\
-	libabc/libabc.h \
 	libabc/libabc-private.h \
 	libabc/libabc.c
 

@@ -27,7 +27,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "libabc.h"
+#include <libabc/libabc.h>
 #include "libabc-private.h"
 
 /**
