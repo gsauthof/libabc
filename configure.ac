@@ -6,7 +6,7 @@ AC_INIT([libabc],
 	[http://www.example.com/libs/libabc/])
 AC_CONFIG_SRCDIR([libabc/libabc.c])
 AC_CONFIG_AUX_DIR([build-aux])
-AM_INIT_AUTOMAKE([check-news foreign 1.11 -Wall -Wno-portability silent-rules tar-pax dist-bzip2 subdir-objects])
+AM_INIT_AUTOMAKE([check-news foreign 1.11 -Wall -Wno-portability silent-rules tar-pax no-dist-gzip dist-xz subdir-objects])
 AC_PROG_CC_STDC
 AC_USE_SYSTEM_EXTENSIONS
 AC_SYS_LARGEFILE

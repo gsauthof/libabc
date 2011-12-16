@@ -1,6 +1,4 @@
 *.o
-*.tar.bz2
-*.tar.gz
 .deps/
 .libs/
 Makefile
@@ -14,4 +12,5 @@ Makefile.in
 /libtool
 /stamp-h1
 
+/libabc-*.tar.xz
 /test-libabc
