@@ -1,14 +1,3 @@
-LIBABC_3 {
-global:
-	abc_thing_ref;
-	abc_thing_unref;
-	abc_thing_get_ctx;
-	abc_thing_new_from_string;
-	abc_thing_get_some_list_entry;
-local:
-	*;
-};
-
 LIBABC_1 {
 global:
 	abc_get_userdata;
@@ -20,5 +9,16 @@ global:
 	abc_set_log_priority;
 	abc_new;
 local:
-        *;
+	*;
 };
+
+LIBABC_3 {
+global:
+	abc_thing_ref;
+	abc_thing_unref;
+	abc_thing_get_ctx;
+	abc_thing_new_from_string;
+	abc_thing_get_some_list_entry;
+local:
+	*;
+} LIBABC_1;
