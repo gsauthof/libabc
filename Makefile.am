@@ -19,7 +19,7 @@ AM_LDFLAGS = \
 	-Wl,--as-needed
 
 SED_PROCESS = \
-	$(AM_V_GEN)$(SED) \
+	$(AM_V_GEN)$(MKDIR_P) $(dir $@) && $(SED) \
 	-e 's,@VERSION\@,$(VERSION),g' \
 	-e 's,@prefix\@,$(prefix),g' \
 	-e 's,@exec_prefix\@,$(exec_prefix),g' \
