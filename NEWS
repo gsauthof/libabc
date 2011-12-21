@@ -1,3 +1,9 @@
+libabc 4
+========
+Use separate include directory: /usr/include/libabc/libabc.h.
+
+Create .xz tarball.
+
 libabc 3
 ========
 Add functionality. Export symbols for 'thing'.

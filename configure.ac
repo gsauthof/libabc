@@ -1,6 +1,6 @@
 AC_PREREQ(2.60)
 AC_INIT([libabc],
-	[1],
+	[4],
 	[libabc-devel@example.com],
 	[libabc],
 	[http://www.example.com/libs/libabc/])
