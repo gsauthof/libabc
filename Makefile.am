@@ -53,8 +53,8 @@ pkgconfig_DATA = libabc/libabc.pc
 EXTRA_DIST += libabc/libabc.pc.in
 CLEANFILES += libabc/libabc.pc
 
-TESTS = test-libabc
+TESTS = libabc/test-libabc
 
-check_PROGRAMS = test-libabc
-test_libabc_SOURCES = test-libabc.c
-test_libabc_LDADD = libabc/libabc.la
+check_PROGRAMS = libabc/test-libabc
+libabc_test_libabc_SOURCES = libabc/test-libabc.c
+libabc_test_libabc_LDADD = libabc/libabc.la
