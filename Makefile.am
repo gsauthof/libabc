@@ -18,6 +18,18 @@ AM_LDFLAGS = \
 	-Wl,--gc-sections \
 	-Wl,--as-needed
 
+SED_PROCESS = \
+	$(AM_V_GEN)$(SED) \
+	-e 's,@VERSION\@,$(VERSION),g' \
+	-e 's,@prefix\@,$(prefix),g' \
+	-e 's,@exec_prefix\@,$(exec_prefix),g' \
+	-e 's,@libdir\@,$(libdir),g' \
+	-e 's,@includedir\@,$(includedir),g' \
+	< $< > $@ || rm $@
+
+%.pc: %.pc.in Makefile
+	$(SED_PROCESS)
+
 LIBABC_CURRENT=2
 LIBABC_REVISION=0
 LIBABC_AGE=2
@@ -38,6 +50,8 @@ libabc_libabc_la_DEPENDENCIES = ${top_srcdir}/libabc/libabc.sym
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libabc/libabc.pc
+EXTRA_DIST += libabc/libabc.pc.in
+CLEANFILES += libabc/libabc.pc
 
 TESTS = test-libabc
 

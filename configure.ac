@@ -40,7 +40,6 @@ AC_SUBST([my_CFLAGS])
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_FILES([
 	Makefile
-	libabc/libabc.pc
 ])
 
 AC_OUTPUT
