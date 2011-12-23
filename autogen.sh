@@ -10,4 +10,10 @@ args="--prefix=/usr \
 --sysconfdir=/etc \
 --libdir=$(libdir /usr/lib)"
 
-exec ./configure $args "$@"
+echo
+echo "----------------------------------------------------------------"
+echo "Initialized build system. For a common configuration please run:"
+echo "----------------------------------------------------------------"
+echo
+echo "# ./configure $args"
+echo
