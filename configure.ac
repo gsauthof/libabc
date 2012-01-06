@@ -1,10 +1,10 @@
 AC_PREREQ(2.60)
-AC_INIT([libabc],
+AC_INIT([abc],
 	[4],
-	[libabc-devel@example.com],
-	[libabc],
-	[http://www.example.com/libs/libabc/])
-AC_CONFIG_SRCDIR([libabc/libabc.c])
+	[abc-devel@example.com],
+	[abc],
+	[http://www.example.com/abc/])
+AC_CONFIG_SRCDIR([src/libabc.c])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([check-news foreign 1.11 -Wall -Wno-portability silent-rules tar-pax no-dist-gzip dist-xz subdir-objects])
 AC_PROG_CC_STDC
@@ -48,7 +48,7 @@ AC_CONFIG_FILES([
 AC_OUTPUT
 AC_MSG_RESULT([
 	$PACKAGE $VERSION
-	========
+	=====
 
 	prefix:			${prefix}
 	sysconfdir:		${sysconfdir}

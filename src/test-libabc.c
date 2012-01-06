@@ -27,7 +27,7 @@
 #include <errno.h>
 #include <unistd.h>
 
-#include <libabc/libabc.h>
+#include <abc/libabc.h>
 
 int main(int argc, char *argv[])
 {

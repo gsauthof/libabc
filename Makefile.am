@@ -5,9 +5,10 @@ AM_MAKEFLAGS = --no-print-directory
 
 AM_CPPFLAGS = \
 	-include $(top_builddir)/config.h \
-	-I${top_srcdir} \
 	-DSYSCONFDIR=\""$(sysconfdir)"\" \
-	-DLIBEXECDIR=\""$(libexecdir)"\"
+	-DLIBEXECDIR=\""$(libexecdir)"\" \
+	-I${top_srcdir}/src/abc \
+	-I${top_srcdir}/src
 
 AM_CFLAGS = ${my_CFLAGS} \
 	-fvisibility=hidden \
@@ -34,27 +35,27 @@ LIBABC_CURRENT=2
 LIBABC_REVISION=0
 LIBABC_AGE=2
 
-pkginclude_HEADERS = libabc/libabc.h
-lib_LTLIBRARIES = libabc/libabc.la
+pkginclude_HEADERS = src/abc/libabc.h
+lib_LTLIBRARIES = src/libabc.la
 
-libabc_libabc_la_SOURCES =\
-	libabc/libabc-private.h \
-	libabc/libabc.c
+src_libabc_la_SOURCES =\
+	src/libabc-private.h \
+	src/libabc.c
 
-EXTRA_DIST += libabc/libabc.sym
+EXTRA_DIST += src/libabc.sym
 
-libabc_libabc_la_LDFLAGS = $(AM_LDFLAGS) \
+src_libabc_la_LDFLAGS = $(AM_LDFLAGS) \
 	-version-info $(LIBABC_CURRENT):$(LIBABC_REVISION):$(LIBABC_AGE) \
-	-Wl,--version-script=$(top_srcdir)/libabc/libabc.sym
-libabc_libabc_la_DEPENDENCIES = ${top_srcdir}/libabc/libabc.sym
+	-Wl,--version-script=$(top_srcdir)/src/libabc.sym
+src_libabc_la_DEPENDENCIES = ${top_srcdir}/src/libabc.sym
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = libabc/libabc.pc
-EXTRA_DIST += libabc/libabc.pc.in
-CLEANFILES += libabc/libabc.pc
+pkgconfig_DATA = src/libabc.pc
+EXTRA_DIST += src/libabc.pc.in
+CLEANFILES += src/libabc.pc
 
-TESTS = libabc/test-libabc
+TESTS = src/test-libabc
 
-check_PROGRAMS = libabc/test-libabc
-libabc_test_libabc_SOURCES = libabc/test-libabc.c
-libabc_test_libabc_LDADD = libabc/libabc.la
+check_PROGRAMS = src/test-libabc
+src_test_libabc_SOURCES = src/test-libabc.c
+src_test_libabc_LDADD = src/libabc.la

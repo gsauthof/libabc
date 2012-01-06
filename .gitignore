@@ -3,7 +3,6 @@
 .libs/
 Makefile
 Makefile.in
-
 /aclocal.m4
 /autom4te.cache
 /build-aux
@@ -11,6 +10,3 @@ Makefile.in
 /configure
 /libtool
 /stamp-h1
-
-/libabc-*.tar.xz
-/test-libabc

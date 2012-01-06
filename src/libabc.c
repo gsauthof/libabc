@@ -1,5 +1,5 @@
 /*
-  libabc - something with abc
+  abc - something with abc
 
   Copyright (C) 2011 Someone <someone@example.com>
 
@@ -27,7 +27,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#include <libabc/libabc.h>
+#include <abc/libabc.h>
 #include "libabc-private.h"
 
 /**
