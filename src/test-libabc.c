@@ -31,20 +31,20 @@
 
 int main(int argc, char *argv[])
 {
-	struct abc_ctx *ctx;
-	struct abc_thing *thing = NULL;
-	int err;
+        struct abc_ctx *ctx;
+        struct abc_thing *thing = NULL;
+        int err;
 
-	err = abc_new(&ctx);
-	if (err < 0)
-		exit(EXIT_FAILURE);
+        err = abc_new(&ctx);
+        if (err < 0)
+                exit(EXIT_FAILURE);
 
-	printf("version %s\n", VERSION);
+        printf("version %s\n", VERSION);
 
-	err = abc_thing_new_from_string(ctx, "foo", &thing);
-	if (err >= 0)
-		abc_thing_unref(thing);
+        err = abc_thing_new_from_string(ctx, "foo", &thing);
+        if (err >= 0)
+                abc_thing_unref(thing);
 
-	abc_unref(ctx);
-	return EXIT_SUCCESS;
+        abc_unref(ctx);
+        return EXIT_SUCCESS;
 }

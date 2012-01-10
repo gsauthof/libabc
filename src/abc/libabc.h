@@ -38,9 +38,9 @@ struct abc_ctx *abc_ref(struct abc_ctx *ctx);
 struct abc_ctx *abc_unref(struct abc_ctx *ctx);
 int abc_new(struct abc_ctx **ctx);
 void abc_set_log_fn(struct abc_ctx *ctx,
-		  void (*log_fn)(struct abc_ctx *ctx,
-				 int priority, const char *file, int line, const char *fn,
-				 const char *format, va_list args));
+                  void (*log_fn)(struct abc_ctx *ctx,
+                                 int priority, const char *file, int line, const char *fn,
+                                 const char *format, va_list args));
 int abc_get_log_priority(struct abc_ctx *ctx);
 void abc_set_log_priority(struct abc_ctx *ctx, int priority);
 void *abc_get_userdata(struct abc_ctx *ctx);
@@ -56,9 +56,9 @@ struct abc_list_entry *abc_list_entry_get_next(struct abc_list_entry *list_entry
 const char *abc_list_entry_get_name(struct abc_list_entry *list_entry);
 const char *abc_list_entry_get_value(struct abc_list_entry *list_entry);
 #define abc_list_entry_foreach(list_entry, first_entry) \
-	for (list_entry = first_entry; \
-	     list_entry != NULL; \
-	     list_entry = abc_list_entry_get_next(list_entry))
+        for (list_entry = first_entry; \
+             list_entry != NULL; \
+             list_entry = abc_list_entry_get_next(list_entry))
 
 /*
  * abc_thing
