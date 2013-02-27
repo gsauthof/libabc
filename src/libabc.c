@@ -143,7 +143,7 @@ ABC_EXPORT int abc_new(struct abc_ctx **ctx)
         c->log_priority = LOG_ERR;
 
         /* environment overwrites config */
-        env = getenv("ABC_LOG");
+        env = secure_getenv("ABC_LOG");
         if (env != NULL)
                 abc_set_log_priority(c, log_priority(env));
 

@@ -49,6 +49,14 @@ abc_log_null(struct abc_ctx *ctx, const char *format, ...) {}
 #  define err(ctx, arg...) abc_log_null(ctx, ## arg)
 #endif
 
+#ifndef HAVE_SECURE_GETENV
+#  ifdef HAVE__SECURE_GETENV
+#    define secure_getenv __secure_getenv
+#  else
+#    error neither secure_getenv nor __secure_getenv is available
+#  endif
+#endif
+
 #define ABC_EXPORT __attribute__ ((visibility("default")))
 
 void abc_log(struct abc_ctx *ctx,

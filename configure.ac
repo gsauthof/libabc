@@ -32,6 +32,8 @@ AS_IF([test "x$enable_debug" = "xyes"], [
         AC_DEFINE(ENABLE_DEBUG, [1], [Debug messages.])
 ])
 
+AC_CHECK_FUNCS([__secure_getenv secure_getenv])
+
 my_CFLAGS="-Wall \
 -Wmissing-declarations -Wmissing-prototypes \
 -Wnested-externs -Wpointer-arith \
