@@ -251,8 +251,10 @@ Never expose fixed size strings in your API
     a buffer, and return ENOSPC if too short.
 
 Glibc has byteswapping calls, don't invent your own:
-  - le32toh(), htole32() and friends
-  - bswap32() and friends()
+  - le32toh(), htole32() all those are documented in endian(3)
+  - bswap_32(), bswap_16(), bswap_64(). #include <byteswap.h>
+  - Don't use the versions provided by the linux kernel headers cpu_to_*() , *_to_cpu.
+    stick to the glibc API.
 
 Don't typedef pointers to structs!
 
