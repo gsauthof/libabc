@@ -19,6 +19,4 @@ global:
         abc_thing_get_ctx;
         abc_thing_new_from_string;
         abc_thing_get_some_list_entry;
-local:
-        *;
 } LIBABC_1;
