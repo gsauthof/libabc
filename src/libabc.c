@@ -173,8 +173,7 @@ ABC_EXPORT struct abc_ctx *abc_ref(struct abc_ctx *ctx)
  * abc_unref:
  * @ctx: abc library context
  *
- * Drop a reference of the abc library context. If the refcount
- * reaches zero, the resources of the context will be released.
+ * Drop a reference of the abc library context.
  *
  **/
 ABC_EXPORT struct abc_ctx *abc_unref(struct abc_ctx *ctx)
@@ -183,7 +182,7 @@ ABC_EXPORT struct abc_ctx *abc_unref(struct abc_ctx *ctx)
                 return NULL;
         ctx->refcount--;
         if (ctx->refcount > 0)
-                return ctx;
+                return NULL;
         info(ctx, "context %p released\n", ctx);
         free(ctx);
         return NULL;
@@ -257,7 +256,7 @@ ABC_EXPORT struct abc_thing *abc_thing_unref(struct abc_thing *thing)
                 return NULL;
         thing->refcount--;
         if (thing->refcount > 0)
-                return thing;
+                return NULL;
         dbg(thing->ctx, "context %p released\n", thing);
         free(thing);
         return NULL;
