@@ -24,9 +24,9 @@
 */
 
 Questions, feedback, patches please email:
-        linux-hotplug@vger.kernel.org
+        systemd-devel@lists.freedesktop.org (subscriber-only)
 or:
-        Kay Sievers <kay.sievers@vrfy.org>
+        Kay Sievers <kay@vrfy.org>
         Lennart Poettering <lennart@poettering.net>
 
 Why bother?
