@@ -233,9 +233,6 @@ ABC_EXPORT void abc_set_log_priority(struct abc_ctx *ctx, int priority)
 }
 
 struct abc_list_entry;
-struct abc_list_entry *abc_list_entry_get_next(struct abc_list_entry *list_entry);
-const char *abc_list_entry_get_name(struct abc_list_entry *list_entry);
-const char *abc_list_entry_get_value(struct abc_list_entry *list_entry);
 
 struct abc_thing {
         struct abc_ctx *ctx;
