@@ -6,7 +6,6 @@ AM_MAKEFLAGS = --no-print-directory
 AM_CPPFLAGS = \
 	-include $(top_builddir)/config.h \
 	-DSYSCONFDIR=\""$(sysconfdir)"\" \
-	-DLIBEXECDIR=\""$(libexecdir)"\" \
 	-I${top_srcdir}/src
 
 AM_CFLAGS = ${my_CFLAGS} \
