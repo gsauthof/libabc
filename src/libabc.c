@@ -251,6 +251,7 @@ ABC_EXPORT struct abc_thing *abc_thing_unref(struct abc_thing *thing)
         if (thing->refcount > 0)
                 return NULL;
         dbg(thing->ctx, "context %p released\n", thing);
+        abc_unref(thing->ctx);
         free(thing);
         return NULL;
 }
@@ -269,7 +270,7 @@ ABC_EXPORT int abc_thing_new_from_string(struct abc_ctx *ctx, const char *string
                 return -ENOMEM;
 
         t->refcount = 1;
-        t->ctx = ctx;
+        t->ctx = abc_ref(ctx);
         *thing = t;
         return 0;
 }
