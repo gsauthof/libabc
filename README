@@ -161,7 +161,7 @@ Avoid *hidden* fork()/exec() in libraries
     pages!). fork() safety for mutex-ridden code is not an
     afterthought, it's a broken right from the beginning.
 
-Make your code safe for unexpected termination and any point:
+Make your code safe for unexpected termination at any point:
   - Do not leave files dirty or temporary files around.
   - This is a tricky, since you need to design your stuff like this
     from the beginning, it's not an afterthought, since you generally
