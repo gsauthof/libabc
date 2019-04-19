@@ -211,7 +211,7 @@ Use standard types
     resolved to as you add new enum values.
 
 Always guard for multiple inclusions of headers
-  - You must place '#ifndef libabc, #define libabc, #endif' in your
+  - You must place '#ifndef LIBABC_H, #define LIBABC_H, #endif' in your
     header files. There is no way around that.
 
 Be careful with variadic functions

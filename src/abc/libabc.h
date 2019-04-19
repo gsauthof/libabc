@@ -14,8 +14,8 @@
   Lesser General Public License for more details.
 */
 
-#ifndef _LIBABC_H_
-#define _LIBABC_H_
+#ifndef LIBABC_H
+#define LIBABC_H
 
 #include <stdarg.h>
 

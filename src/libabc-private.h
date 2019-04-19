@@ -22,6 +22,8 @@
 
 #include <abc/libabc.h>
 
+#include <config.h>
+
 static inline void __attribute__((always_inline, format(printf, 2, 3)))
 abc_log_null(struct abc_ctx *ctx, const char *format, ...) {}
 

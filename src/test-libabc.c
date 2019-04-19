@@ -25,6 +25,8 @@
 
 #include <abc/libabc.h>
 
+#include <config.h>
+
 int main(int argc, char *argv[])
 {
         struct abc_ctx *ctx;
